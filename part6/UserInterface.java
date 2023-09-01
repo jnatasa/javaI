@@ -12,36 +12,42 @@ import java.util.Scanner;
  * @author integ
  */
 public class UserInterface {
-    
-    private TodoList todoList;
+    private JokeManager jokes;
     private Scanner scanner;
-     public UserInterface(TodoList todoList, Scanner scanner){
-        this.todoList = todoList;
+    
+     public UserInterface(JokeManager jokes, Scanner scanner) {
+        this.jokes = jokes;
         this.scanner = scanner;
     }
-   
-    public void start(){
+
+    public void start() {
+        System.out.println("What a joke!");
         
-        while(true){
-            System.out.println("Command:");
-            String command = scanner.nextLine();
+        while (true) {
+            System.out.println("Commands:");
+            System.out.println(" 1 - add a joke");
+            System.out.println(" 2 - draw a joke");
+            System.out.println(" 3 - list jokes");
+            System.out.println(" X - stop");
             
-            if(command.equals("stop")){
+            String command = scanner.nextLine();
+            if(command.equals("X")){
                 break;
             }
-            else if(command.equals("add")){
-                System.out.println("To add:");
-                String addTask = scanner.nextLine();
-                todoList.add(addTask);
-            }
-            else if(command.equals("list")){
-                todoList.print();
-            }
-            else if(command.equals("remove")){
-                System.out.println("Which one is removed?");
-                int removed = Integer.valueOf(scanner.nextLine());
-                todoList.remove(removed);
+            
+            if(command.equals("1")){
+                System.out.println("Write the joke to be added:");
+                String joke = scanner.nextLine();
+                jokes.addJoke(joke);
+            } else if (command.equals("2")){
+                System.out.println("Drawing a joke.");
+                String drawnJoke = jokes.drawJoke();
+                System.out.println(drawnJoke);
+            } else if (command.equals("3")){
+                System.out.println("Printing the jokes.");
+                jokes.printJokes();
             }
         }
     }
+    
 }
